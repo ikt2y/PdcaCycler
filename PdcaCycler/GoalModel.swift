@@ -30,4 +30,17 @@ class GoalModel: Object {
         return "id"
     }
     
+    // auto increment
+    func getLastID() -> Int{
+        let realm = try! Realm()
+        let goalModel: NSArray = Array(realm.objects(GoalModel.self).sorted(byKeyPath: "id")) as NSArray
+        let last = goalModel.lastObject
+        if goalModel.count > 0 {
+            let lastID = (last as AnyObject).value(forKey: "id") as? Int
+            return lastID! + 1
+        } else {
+            return 1
+        }
+    }
+    
 }

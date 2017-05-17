@@ -26,11 +26,23 @@ class PlanModel: Object {
     // アソシエーション
     dynamic var owner: GoalModel?// GoalModelに紐付いている
     let checks = List<CheckModel>()// CheckModelを複数持っている
-    
-    
+
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    // auto increment
+    func getLastID() -> Int{
+        let realm = try! Realm()
+        let planModel: NSArray = Array(realm.objects(PlanModel.self).sorted(byKeyPath: "id")) as NSArray
+        let last = planModel.lastObject
+        if planModel.count > 0 {
+            let lastID = (last as AnyObject).value(forKey: "id") as? Int
+            return lastID! + 1
+        } else {
+            return 1
+        }
     }
     
 }

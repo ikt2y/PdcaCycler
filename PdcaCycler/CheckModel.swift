@@ -29,4 +29,17 @@ class CheckModel: Object {
         return "id"
     }
     
+    // auto increment
+    func getLastID() -> Int{
+        let realm = try! Realm()
+        let checkModel: NSArray = Array(realm.objects(CheckModel.self).sorted(byKeyPath: "id")) as NSArray
+        let last = checkModel.lastObject
+        if checkModel.count > 0 {
+            let lastID = (last as AnyObject).value(forKey: "id") as? Int
+            return lastID! + 1
+        } else {
+            return 1
+        }
+    }
+    
 }
