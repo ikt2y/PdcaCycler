@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GoalTableViewController: UITableViewController {
-
+    let realm = try! Realm()
+    var goals: [GoalModel] = []
+    var goal: GoalModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,18 +23,18 @@ class GoalTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 90
         // 自動で調整
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        
         // NavTitle
         self.navigationItem.title = "目標リスト"
         // RightNavBtn
         let rightSearchBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.onTapAddGoal))
         // add the button to navigationBar
         self.navigationItem.setRightBarButtonItems([rightSearchBarButtonItem], animated: true)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.fetchGoals()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func fetchGoals() {
+        goals = GoalModel.getAllGoals()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,11 +51,15 @@ class GoalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return goals.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as! GoalTableViewCell
+        let item = goals[indexPath.row]
+        cell.name.text = item.name
+        cell.startDate.text = item.startDate.dateToString()
+        cell.endDate.text = item.endDate.dateToString()
         return cell
     }
     
