@@ -57,12 +57,9 @@ class GoalTableViewController: UITableViewController {
     
     // Addボタンタップした時
     func onTapAddGoal(){
-        // 遷移先のVCをインスタンス化
-        let addGoalVC = AddGoalViewController()
-        // NavConにセット
-        let nav = UINavigationController(rootViewController: addGoalVC)
-        // 遷移
-        self.present(nav, animated: true, completion: nil)
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextView = storyboard.instantiateViewController(withIdentifier: "AddGoalVC")
+        present(nextView, animated: true, completion: nil)
     }
 
     /*

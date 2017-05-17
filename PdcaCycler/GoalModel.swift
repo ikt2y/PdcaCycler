@@ -16,11 +16,11 @@ class GoalModel: Object {
     static let realm = try! Realm()
     
     // プロパティ
-    dynamic var id = ""// id
+    dynamic var id = 0// id
     dynamic var name = ""// Goal名
     dynamic var text = ""// 説明
-    dynamic var startDate: NSDate!// 開始日
-    dynamic var endDate: NSDate!// 終了予定日
+    dynamic var startDate: Date!// 開始日
+    dynamic var endDate: Date!// 終了予定日
     
     // アソシエーション
     let plans = List<PlanModel>()// PlanModelを複数持っている
@@ -31,16 +31,29 @@ class GoalModel: Object {
     }
     
     // auto increment
-    func getLastID() -> Int{
-        let realm = try! Realm()
-        let goalModel: NSArray = Array(realm.objects(GoalModel.self).sorted(byKeyPath: "id")) as NSArray
-        let last = goalModel.lastObject
-        if goalModel.count > 0 {
-            let lastID = (last as AnyObject).value(forKey: "id") as? Int
-            return lastID! + 1
+    static func getLastID() -> Int{
+        if let goal = realm.objects(GoalModel.self).last {
+            return goal.id + 1
         } else {
             return 1
         }
     }
     
+    // create
+    static func create(name: String, text: String, endDate: Date) -> GoalModel {
+        let goal = GoalModel()
+        goal.name = name
+        goal.text = text
+        goal.startDate = Date()
+        goal.endDate = endDate
+        goal.id = self.getLastID()
+        return goal
+    }
+
+    // save
+    func save() {
+        try! GoalModel.realm.write {
+            GoalModel.realm.add(self)
+        }
+    }
 }
