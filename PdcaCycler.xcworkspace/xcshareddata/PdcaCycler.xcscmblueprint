@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6579EC1037F10D05D31522E759E245B71CA06048",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "700CA48EFDE924D9977D959D4EB3815B87EE10E9" : 9223372036854775807,
+    "6579EC1037F10D05D31522E759E245B71CA06048" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AF001BF2-07DA-433F-AF10-7BBB16041F8F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "700CA48EFDE924D9977D959D4EB3815B87EE10E9" : "",
+    "6579EC1037F10D05D31522E759E245B71CA06048" : "PdcaCycler\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PdcaCycler",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PdcaCycler.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ikt2y\/PdcaCycler.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6579EC1037F10D05D31522E759E245B71CA06048"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ikt2y\/iOS-Projects.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "700CA48EFDE924D9977D959D4EB3815B87EE10E9"
+    }
+  ]
+}
