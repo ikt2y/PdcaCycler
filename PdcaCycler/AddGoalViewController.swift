@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddGoalViewController: UIViewController {
-
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var text: UITextField!
+    @IBOutlet weak var endDate: UIDatePicker!
+    var tmpDate:NSDate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavTitle
@@ -22,6 +27,15 @@ class AddGoalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func tapSaveBtn(_ sender: Any) {
+        // 登録
+        let g = GoalModel.create(name: name.text!, text: text.text!, endDate: endDate.date as Date!)
+        // 保存
+        g.save()
+        // モーダル閉じる
+        self.dismiss(animated: true, completion: nil)
+    }
+
 
     /*
     // MARK: - Navigation
