@@ -15,8 +15,17 @@ class GoalTableViewController: UITableViewController {
         
         // xibファイルの紐付け
         self.tableView.register(UINib(nibName: "GoalTableViewCell", bundle: nil), forCellReuseIdentifier: "goalCell")
+        // cellの高さの設定
         self.tableView.estimatedRowHeight = 90
+        // 自動で調整
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // NavTitle
+        self.navigationItem.title = "目標リスト"
+        // RightNavBtn
+        let rightSearchBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.onTapAddGoal))
+        // add the button to navigationBar
+        self.navigationItem.setRightBarButtonItems([rightSearchBarButtonItem], animated: true)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -44,6 +53,16 @@ class GoalTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as! GoalTableViewCell
         return cell
+    }
+    
+    // Addボタンタップした時
+    func onTapAddGoal(){
+        // 遷移先のVCをインスタンス化
+        let addGoalVC = AddGoalViewController()
+        // NavConにセット
+        let nav = UINavigationController(rootViewController: addGoalVC)
+        // 遷移
+        self.present(nav, animated: true, completion: nil)
     }
 
     /*

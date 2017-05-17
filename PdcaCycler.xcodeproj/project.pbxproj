@@ -18,6 +18,7 @@
 		8AFF8F441ECC541E00CF8BE2 /* GoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F431ECC541E00CF8BE2 /* GoalTableViewController.swift */; };
 		8AFF8F481ECC548900CF8BE2 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */; };
 		8AFF8F491ECC548900CF8BE2 /* GoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */; };
+		8AFF8F4B1ECC779400CF8BE2 /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F4A1ECC779400CF8BE2 /* AddGoalViewController.swift */; };
 		E374D4F313844C2EA4818A55 /* Pods_PdcaCycler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DF0B3524977B5285D78E63 /* Pods_PdcaCycler.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		8AFF8F431ECC541E00CF8BE2 /* GoalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewController.swift; sourceTree = "<group>"; };
 		8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
 		8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalTableViewCell.xib; sourceTree = "<group>"; };
+		8AFF8F4A1ECC779400CF8BE2 /* AddGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
 		9188C96FB3FAC337927EFCF2 /* Pods-PdcaCycler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PdcaCycler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PdcaCycler/Pods-PdcaCycler.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		8AFF8F451ECC543600CF8BE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8AFF8F4A1ECC779400CF8BE2 /* AddGoalViewController.swift */,
 				8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */,
 				8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */,
 			);
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A31652C1ECC4167006ED985 /* ViewController.swift in Sources */,
+				8AFF8F4B1ECC779400CF8BE2 /* AddGoalViewController.swift in Sources */,
 				8AFF8F481ECC548900CF8BE2 /* GoalTableViewCell.swift in Sources */,
 				8A31652A1ECC4167006ED985 /* AppDelegate.swift in Sources */,
 				8AFF8F421ECC4A4600CF8BE2 /* CheckModel.swift in Sources */,
