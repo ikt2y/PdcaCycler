@@ -1,0 +1,6 @@
+framework module Pods_PdcaCycler {
+  umbrella header "Pods-PdcaCycler-umbrella.h"
+
+  export *
+  module * { export * }
+}
