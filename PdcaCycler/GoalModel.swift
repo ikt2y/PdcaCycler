@@ -56,4 +56,14 @@ class GoalModel: Object {
             GoalModel.realm.add(self)
         }
     }
+    
+    // fetch
+    static func getAllGoals() -> [GoalModel] {
+        let goals = realm.objects(GoalModel.self).sorted(byKeyPath: "id", ascending: true)
+        var goalList: [GoalModel] = []
+        for goal in goals {
+            goalList.append(goal)
+        }
+        return goalList
+    }
 }
