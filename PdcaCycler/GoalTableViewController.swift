@@ -14,8 +14,9 @@ class GoalTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // xibファイルの紐付け
-         self.tableView.register(UINib(nibName: "GoalTableViewCell", bundle: nil), forCellReuseIdentifier: "goalCell")
-
+        self.tableView.register(UINib(nibName: "GoalTableViewCell", bundle: nil), forCellReuseIdentifier: "goalCell")
+        self.tableView.estimatedRowHeight = 90
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
