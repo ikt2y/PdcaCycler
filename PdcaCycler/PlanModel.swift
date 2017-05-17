@@ -19,6 +19,7 @@ class PlanModel: Object {
     dynamic var id = ""// id
     dynamic var name = ""// Plan名
     dynamic var text = ""// 説明
+    dynamic var status: Bool = false// ステータス
     dynamic var startDate: NSDate!// 開始日
     dynamic var endDate: NSDate!// 終了日
     
