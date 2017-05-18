@@ -28,10 +28,11 @@ class PlanModel: Object {
     dynamic var problem = ""
     dynamic var nextPlan = ""
     dynamic var lookBackDate: Date!
-    
-    // アソシエーション
-    dynamic var owner: GoalModel?
 
+    // アソシエーション
+    var owner: GoalModel?
+    
+    
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
         return "id"
@@ -64,5 +65,20 @@ class PlanModel: Object {
             PlanModel.realm.add(self)
         }
     }
+    
+    // GoalIdに紐づくPlanの配列を取得
+    static func getPlansByGoalId(goalId:Int) -> [PlanModel] {
+        // タップしたGoalオブジェクトをidから取得
+        let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
+        // Goalオブジェクトに紐づくPlanオブジェクトを取得
+        let plans = goal.plans
+        var planList: [PlanModel] = []
+        for plan in plans {
+            planList.append(plan)
+        }
+        // 配列で返す
+        return planList
+    }
+    
     
 }
