@@ -30,7 +30,7 @@ class PlanModel: Object {
     dynamic var lookBackDate: Date!
 
     // アソシエーション
-    var owner: GoalModel?
+    dynamic var owner: GoalModel?
     
     
     // プライマリーキーの設定
@@ -56,6 +56,7 @@ class PlanModel: Object {
         plan.startDate = Date()
         plan.id = self.getLastID()
         plan.owner = goal
+        goal?.plans.append(plan)
         return plan
     }
     
