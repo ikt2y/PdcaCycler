@@ -49,14 +49,16 @@ class PlanModel: Object {
     
     // create plan
     static func createPlan(tmpGoalId: Int, name: String, endDate: Date) -> PlanModel {
-        let goal = realm.object(ofType: GoalModel.self, forPrimaryKey: tmpGoalId)
+        let goal:GoalModel = realm.object(ofType: GoalModel.self, forPrimaryKey: tmpGoalId)!
         let plan = PlanModel()
-        plan.name = name
-        plan.endDate = endDate
-        plan.startDate = Date()
-        plan.id = self.getLastID()
-        plan.owner = goal
-        goal?.plans.append(plan)
+        try! realm.write {
+            plan.name = name
+            plan.endDate = endDate
+            plan.startDate = Date()
+            plan.id = self.getLastID()
+            plan.owner = goal
+            goal.plans.append(plan)
+        }
         return plan
     }
     
