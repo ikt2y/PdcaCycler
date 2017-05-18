@@ -12,9 +12,11 @@
 		8A31652F1ECC4167006ED985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A31652D1ECC4167006ED985 /* Main.storyboard */; };
 		8A3165311ECC4167006ED985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A3165301ECC4167006ED985 /* Assets.xcassets */; };
 		8A3165341ECC4167006ED985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A3165321ECC4167006ED985 /* LaunchScreen.storyboard */; };
+		8A366BDF1ECD7A3500A76078 /* PlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A366BDE1ECD7A3500A76078 /* PlanTableViewController.swift */; };
+		8A366BE11ECD7B5F00A76078 /* AddPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A366BE01ECD7B5F00A76078 /* AddPlanViewController.swift */; };
+		8ACC9D141ECCAB3B00FACB46 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC9D131ECCAB3B00FACB46 /* DateExtention.swift */; };
 		8AFF8F3E1ECC43B300CF8BE2 /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F3D1ECC43B300CF8BE2 /* GoalModel.swift */; };
 		8AFF8F401ECC447500CF8BE2 /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F3F1ECC447500CF8BE2 /* PlanModel.swift */; };
-		8AFF8F421ECC4A4600CF8BE2 /* CheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F411ECC4A4600CF8BE2 /* CheckModel.swift */; };
 		8AFF8F441ECC541E00CF8BE2 /* GoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F431ECC541E00CF8BE2 /* GoalTableViewController.swift */; };
 		8AFF8F481ECC548900CF8BE2 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */; };
 		8AFF8F491ECC548900CF8BE2 /* GoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */; };
@@ -32,9 +34,11 @@
 		8A3165301ECC4167006ED985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A3165331ECC4167006ED985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A3165351ECC4167006ED985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A366BDE1ECD7A3500A76078 /* PlanTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTableViewController.swift; sourceTree = "<group>"; };
+		8A366BE01ECD7B5F00A76078 /* AddPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlanViewController.swift; sourceTree = "<group>"; };
+		8ACC9D131ECCAB3B00FACB46 /* DateExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		8AFF8F3D1ECC43B300CF8BE2 /* GoalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		8AFF8F3F1ECC447500CF8BE2 /* PlanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
-		8AFF8F411ECC4A4600CF8BE2 /* CheckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckModel.swift; sourceTree = "<group>"; };
 		8AFF8F431ECC541E00CF8BE2 /* GoalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewController.swift; sourceTree = "<group>"; };
 		8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
 		8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalTableViewCell.xib; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 		8A3165281ECC4167006ED985 /* PdcaCycler */ = {
 			isa = PBXGroup;
 			children = (
+				8ACC9D121ECCA9F700FACB46 /* Extention */,
 				8AFF8F451ECC543600CF8BE2 /* View */,
 				8AFF8F3C1ECC42BF00CF8BE2 /* Controller */,
 				8AFF8F3B1ECC42BA00CF8BE2 /* Model */,
@@ -88,12 +93,19 @@
 			path = PdcaCycler;
 			sourceTree = "<group>";
 		};
+		8ACC9D121ECCA9F700FACB46 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				8ACC9D131ECCAB3B00FACB46 /* DateExtention.swift */,
+			);
+			name = Extention;
+			sourceTree = "<group>";
+		};
 		8AFF8F3B1ECC42BA00CF8BE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8AFF8F3D1ECC43B300CF8BE2 /* GoalModel.swift */,
 				8AFF8F3F1ECC447500CF8BE2 /* PlanModel.swift */,
-				8AFF8F411ECC4A4600CF8BE2 /* CheckModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -102,6 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				8AFF8F431ECC541E00CF8BE2 /* GoalTableViewController.swift */,
+				8AFF8F4A1ECC779400CF8BE2 /* AddGoalViewController.swift */,
+				8A366BDE1ECD7A3500A76078 /* PlanTableViewController.swift */,
+				8A366BE01ECD7B5F00A76078 /* AddPlanViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -109,7 +124,6 @@
 		8AFF8F451ECC543600CF8BE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8AFF8F4A1ECC779400CF8BE2 /* AddGoalViewController.swift */,
 				8AFF8F461ECC548900CF8BE2 /* GoalTableViewCell.swift */,
 				8AFF8F471ECC548900CF8BE2 /* GoalTableViewCell.xib */,
 			);
@@ -260,12 +274,14 @@
 			files = (
 				8A31652C1ECC4167006ED985 /* ViewController.swift in Sources */,
 				8AFF8F4B1ECC779400CF8BE2 /* AddGoalViewController.swift in Sources */,
+				8ACC9D141ECCAB3B00FACB46 /* DateExtention.swift in Sources */,
+				8A366BE11ECD7B5F00A76078 /* AddPlanViewController.swift in Sources */,
 				8AFF8F481ECC548900CF8BE2 /* GoalTableViewCell.swift in Sources */,
 				8A31652A1ECC4167006ED985 /* AppDelegate.swift in Sources */,
-				8AFF8F421ECC4A4600CF8BE2 /* CheckModel.swift in Sources */,
 				8AFF8F401ECC447500CF8BE2 /* PlanModel.swift in Sources */,
 				8AFF8F441ECC541E00CF8BE2 /* GoalTableViewController.swift in Sources */,
 				8AFF8F3E1ECC43B300CF8BE2 /* GoalModel.swift in Sources */,
+				8A366BDF1ECD7A3500A76078 /* PlanTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
