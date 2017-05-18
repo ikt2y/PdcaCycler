@@ -16,7 +16,7 @@ class PlanModel: Object {
     static let realm = try! Realm()
     
     // プロパティ
-    dynamic var id = ""// id
+    dynamic var id = 0// id
     dynamic var status = 0// ステータス
         // plan作成時
     dynamic var name = ""// Plan名
@@ -38,13 +38,9 @@ class PlanModel: Object {
     }
     
     // auto increment
-    func getLastID() -> Int{
-        let realm = try! Realm()
-        let planModel: NSArray = Array(realm.objects(PlanModel.self).sorted(byKeyPath: "id")) as NSArray
-        let last = planModel.lastObject
-        if planModel.count > 0 {
-            let lastID = (last as AnyObject).value(forKey: "id") as? Int
-            return lastID! + 1
+    static func getLastID() -> Int{
+        if let plan = realm.objects(PlanModel.self).last {
+            return plan.id + 1
         } else {
             return 1
         }
