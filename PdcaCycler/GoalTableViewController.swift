@@ -22,6 +22,10 @@ class GoalTableViewController: UITableViewController{
         self.tableView.register(nib, forCellReuseIdentifier: "goalCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
+        self.refreshControl?.addTarget(self, action: #selector(GoalTableViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +42,13 @@ class GoalTableViewController: UITableViewController{
         // Goalの読み込み
         self.fetchGoals()
         
+    }
+    
+    func refresh() {
+        goals = GoalModel.getAllGoals()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     func fetchGoals() {
