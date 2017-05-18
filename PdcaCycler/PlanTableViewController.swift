@@ -7,14 +7,38 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PlanTableViewController: UITableViewController {
-    var willGoalId:Int?
-
+    var willGoalId:Int!
+    let realm = try! Realm()
+    var plans: [PlanModel] = []
+    var plan: PlanModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.onTapAddPlan))
         self.navigationItem.setRightBarButtonItems([rightAddBarButtonItem], animated: true)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
+        self.refreshControl?.addTarget(self, action: #selector(GoalTableViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.fetchPlans(goalId: self.willGoalId)
+    }
+    
+    func refresh(goalId: Int) {
+        plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.refreshControl?.endRefreshing()
+        }
+    }
+
+    
+    func fetchPlans(goalId: Int) {
+        plans = PlanModel.getPlansByGoalId(goalId: goalId)
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,17 +48,19 @@ class PlanTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return plans.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // sample
         let cell: UITableViewCell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        let item = plans[indexPath.row]
+        cell.textLabel?.text = item.name
         return cell
     }
     
