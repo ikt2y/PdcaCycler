@@ -17,15 +17,20 @@ class PlanModel: Object {
     
     // プロパティ
     dynamic var id = ""// id
+    dynamic var status = 0// ステータス
+        // plan作成時
     dynamic var name = ""// Plan名
-    dynamic var text = ""// 説明
-    dynamic var status: Bool = false// ステータス
     dynamic var startDate: NSDate!// 開始日
     dynamic var endDate: NSDate!// 終了日
+        // check振り返り時
+    dynamic var memo = ""
+    dynamic var keep = ""
+    dynamic var problem = ""
+    dynamic var nextPlan = ""
+    dynamic var lookBackDate: NSDate!
     
     // アソシエーション
     dynamic var owner: GoalModel?// GoalModelに紐付いている
-    let checks = List<CheckModel>()// CheckModelを複数持っている
 
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
