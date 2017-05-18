@@ -19,6 +19,7 @@ class GoalModel: Object {
     dynamic var id = 0// id
     dynamic var name = ""// Goal名
     dynamic var text = ""// 説明
+    dynamic var status: Bool = false// ステータス
     dynamic var startDate: Date!// 開始日
     dynamic var endDate: Date!// 終了予定日
     
