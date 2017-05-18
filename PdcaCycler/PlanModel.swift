@@ -20,14 +20,14 @@ class PlanModel: Object {
     dynamic var status = 0// ステータス
         // plan作成時
     dynamic var name = ""// Plan名
-    dynamic var startDate: NSDate!// 開始日
-    dynamic var endDate: NSDate!// 終了日
+    dynamic var startDate: Date!// 開始日
+    dynamic var endDate: Date!// 終了日
         // check振り返り時
     dynamic var memo = ""
     dynamic var keep = ""
     dynamic var problem = ""
     dynamic var nextPlan = ""
-    dynamic var lookBackDate: NSDate!
+    dynamic var lookBackDate: Date!
     
     // アソシエーション
     dynamic var owner: GoalModel?// GoalModelに紐付いている
