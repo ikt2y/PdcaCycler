@@ -51,14 +51,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="m46-eI-NBS">
-                        <barButtonItem key="leftBarButtonItem" title="Plan" id="DXy-t9-qem">
-                            <connections>
-                                <segue destination="SKC-sE-ZG7" kind="show" id="K1G-TS-gR4"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Plan" id="DXy-t9-qem"/>
                     </navigationItem>
                     <connections>
                         <segue destination="G5d-6R-DSY" kind="show" id="imj-MN-GeO"/>
+                        <segue destination="SKC-sE-ZG7" kind="show" identifier="toPlanTableVC" id="Snn-NO-BRj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8B-p3-EAK" userLabel="First Responder" sceneMemberID="firstResponder"/>

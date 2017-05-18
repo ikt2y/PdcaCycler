@@ -9,6 +9,7 @@
 import UIKit
 
 class PlanTableViewController: UITableViewController {
+    var willGoalId:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,6 @@ class PlanTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // sample
         let cell: UITableViewCell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "aaaaaaaa"
-        cell.frame.size.height = 30
         return cell
     }
     
