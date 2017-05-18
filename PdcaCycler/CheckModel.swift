@@ -16,10 +16,11 @@ class CheckModel: Object {
     
     // プロパティ
     dynamic var id = ""// id
-    dynamic var name = ""// Plan名
-    dynamic var text = ""// 説明
-    dynamic var startDate: NSDate!// 開始日
-    dynamic var endDate: NSDate!// 終了日
+    dynamic var memo = ""// メモ
+    dynamic var keep = ""// Keep(振り返りでよかったこと/続けたいこと)
+    dynamic var problem = ""// Problem(振り返りで悪かったこと)
+    dynamic var try = ""// Try(振り返りで改善策、次のPlan)
+    dynamic var createdDate: NSDate!// 振り返り日
     
     // アソシエーション
     dynamic var owner: PlanModel?// PlanModelに紐付いている
