@@ -9,10 +9,15 @@
 import UIKit
 
 class AddPlanViewController: UIViewController {
-
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var endDatePicker: UIDatePicker!
+    var tmpGoalId:Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "計画をつくる"
+        // テスト
+        self.tmpGoalId = 1
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +26,11 @@ class AddPlanViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func tapSaveBtn(_ sender: Any) {
+        let p = PlanModel.createPlan(tmpGoalId: self.tmpGoalId!, name: nameTextField.text!, endDate: endDatePicker.date as Date!)
+        p.save()
+        self.dismiss(animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

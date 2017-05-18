@@ -30,7 +30,7 @@ class PlanModel: Object {
     dynamic var lookBackDate: Date!
     
     // アソシエーション
-    dynamic var owner: GoalModel?// GoalModelに紐付いている
+    dynamic var owner: GoalModel?
 
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
@@ -43,6 +43,25 @@ class PlanModel: Object {
             return plan.id + 1
         } else {
             return 1
+        }
+    }
+    
+    // create plan
+    static func createPlan(tmpGoalId: Int, name: String, endDate: Date) -> PlanModel {
+        let goal = realm.object(ofType: GoalModel.self, forPrimaryKey: tmpGoalId)
+        let plan = PlanModel()
+        plan.name = name
+        plan.endDate = endDate
+        plan.startDate = Date()
+        plan.id = self.getLastID()
+        plan.owner = goal
+        return plan
+    }
+    
+    // save
+    func save() {
+        try! PlanModel.realm.write {
+            PlanModel.realm.add(self)
         }
     }
     
