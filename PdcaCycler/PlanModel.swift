@@ -62,11 +62,28 @@ class PlanModel: Object {
         return plan
     }
     
+    // 振り返り時の上書き
+    static func addActInfo(plan: PlanModel,keep: String, problem: String, nextPlan: String, memo: String, status: Int) {
+        try! realm.write({
+            plan.keep = keep
+            plan.problem = problem
+            plan.nextPlan = nextPlan
+            plan.lookBackDate = Date()
+            plan.status = status
+        })
+    }
+    
     // save
     func save() {
         try! PlanModel.realm.write {
             PlanModel.realm.add(self)
         }
+    }
+    
+    // idから取得
+    static func getPlanById(id:Int) -> PlanModel {
+        let plan = realm.objects(PlanModel.self).filter("id == \(id)").first!
+        return plan
     }
     
     // GoalIdに紐づくPlanの配列を取得

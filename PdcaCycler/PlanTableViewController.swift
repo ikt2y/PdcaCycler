@@ -11,6 +11,7 @@ import RealmSwift
 
 class PlanTableViewController: UITableViewController {
     var willGoalId:Int?
+    var fromPlanId:Int?
     let realm = try! Realm()
     var plans: [PlanModel] = []
     var plan: PlanModel!
@@ -77,8 +78,10 @@ class PlanTableViewController: UITableViewController {
             return [completeBtn]
         case 1:
             let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
-                // ステータス変更
-                PlanModel.changeStatus(plan: item, status: 2)
+                // アクションを加えたPlanのidを取得し代入
+                self.fromPlanId = item.id
+                // 振り返り画面に遷移
+                self.performSegue(withIdentifier: "toCheckVC",sender: nil)
             }
             checkBtn.backgroundColor = UIColor.blue
             return [checkBtn]
@@ -121,6 +124,21 @@ class PlanTableViewController: UITableViewController {
             navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: addPlanVC, action: #selector(addPlanVC.tapCloseBtn(_:)))
             navBar.pushItem(navItem, animated:true)
             segue.destination.view.addSubview(navBar)
+            
+        } else if(segue.identifier == "toCheckVC") {
+            
+            let checkVC: CheckViewController = segue.destination as! CheckViewController
+            checkVC.toPlanId = self.fromPlanId!
+            
+            //ナビゲーションバーを作る
+            let navBar = UINavigationBar()
+            navBar.frame = CGRect(x:0, y:0, width:self.view.bounds.width, height:60)
+            let navItem: UINavigationItem = UINavigationItem(title:"振り返りをする")
+            navItem.rightBarButtonItem = UIBarButtonItem(title: "作成",style:UIBarButtonItemStyle.plain, target: checkVC, action: #selector(checkVC.tapSaveBtn(_:)))
+            navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: checkVC, action: #selector(checkVC.tapCloseBtn(_:)))
+            navBar.pushItem(navItem, animated:true)
+            segue.destination.view.addSubview(navBar)
+            
         }
     }
 }
