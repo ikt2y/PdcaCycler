@@ -87,16 +87,31 @@ class PlanModel: Object {
     }
     
     // GoalIdに紐づくPlanの配列を取得
-    static func getPlansByGoalId(goalId:Int) -> [PlanModel] {
+    static func getPlansByGoalId(goalId:Int) -> [Int: [PlanModel]] {
         // タップしたGoalオブジェクトをidから取得
         let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
         // Goalオブジェクトに紐づくPlanオブジェクトを取得
         let plans = goal.plans
-        var planList: [PlanModel] = []
+        var planList = [Int: [PlanModel]]()
+        var doList: [PlanModel] = []
+        var checkList: [PlanModel] = []
+        var actList: [PlanModel] = []
+        
         for plan in plans {
-            planList.append(plan)
+            switch plan.status {
+            case 0:
+                doList.append(plan)
+            case 1:
+                checkList.append(plan)
+            case 2:
+                actList.append(plan)
+            default:
+                break
+            }
+
         }
         // 配列で返す
+        planList = [0:doList, 1:checkList, 2:actList]
         return planList
     }
     
@@ -105,6 +120,33 @@ class PlanModel: Object {
         try! realm.write({
             plan.status = status
         })
+    }
+    
+    static func fetchDoArray() -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("status == 0")
+        var doArray: [PlanModel] = []
+        for plan in plans {
+            doArray.append(plan)
+        }
+        return doArray
+    }
+    
+    static func fetchCheckArray() -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("status == 1")
+        var checkArray: [PlanModel] = []
+        for plan in plans {
+            checkArray.append(plan)
+        }
+        return checkArray
+    }
+    
+    static func fetchActArray() -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("status == 2")
+        var actArray: [PlanModel] = []
+        for plan in plans {
+            actArray.append(plan)
+        }
+        return actArray
     }
     
     

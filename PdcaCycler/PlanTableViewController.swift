@@ -13,8 +13,13 @@ class PlanTableViewController: UITableViewController {
     var willGoalId:Int?
     var fromPlanId:Int?
     let realm = try! Realm()
+    var planList: [Int: [PlanModel]] = [:]
     var plans: [PlanModel] = []
     var plan: PlanModel!
+    
+    // Section Data
+    let sectionArray: [String] = ["DO", "CHECK", "ACT"]
+    var sectionData: [Int: [String]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +44,11 @@ class PlanTableViewController: UITableViewController {
 
     
     func fetchPlans(goalId: Int) {
-        plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        self.planList = PlanModel.getPlansByGoalId(goalId: goalId)
+        let doList: [PlanModel] = []
+        let checkList: [PlanModel] = []
+        let actList: [PlanModel] = []
+        [0:doList, 1:checkList, 2:actList] = planList
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,11 +56,30 @@ class PlanTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    
+    // sectionの設定
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
-
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let myView: UIView = UIView()
+        myView.backgroundColor = .black
+        let label = UILabel()
+        label.text = sectionArray[section]
+        label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
+        myView.addSubview(label)
+        return myView
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionArray[section]
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return plans.count
@@ -61,17 +89,25 @@ class PlanTableViewController: UITableViewController {
         
         // create
         if let cell = tableView.dequeueReusableCell(withIdentifier: "planCell", for: indexPath) as? PlanCell {
-            let item = plans[indexPath.row]
+            
+            let plan = plans[indexPath.row]
             cell.defaultColor = .lightGray
             cell.firstTrigger = 0.25;
             cell.selectionStyle = .gray
-            cell.titleLabel.text = item.name
-            cell.endDateLabel.text = item.endDate.dateToString()
+            cell.titleLabel.text = plan.name
+            cell.endDateLabel.text = plan.endDate.dateToString()
             cell.BackView.backgroundColor = colorForIndex(index: indexPath.row)
             
-            cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
-                // 処理
-            })
+            // まだ手をつけていない時はスワイプで完了できる
+            if plan.status == 0 {
+                cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
+                    // ステータスの変更
+                    PlanModel.changeStatus(plan: plan, status: 1)
+                    // 再読み込み
+                })
+            }
+            
+            
             return cell
         }
         return UITableViewCell()
