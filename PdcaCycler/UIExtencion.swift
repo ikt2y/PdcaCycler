@@ -16,3 +16,18 @@ extension UITextField {
         self.layer.addSublayer(border)
     }
 }
+
+// 外をタップでキーボード閉じる
+extension ViewController: UIGestureRecognizerDelegate {
+    func dismissKeyboard(_ gesture: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+}
+
+// Enterでキーボード閉じる.
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
