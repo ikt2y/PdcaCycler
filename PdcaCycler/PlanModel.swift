@@ -87,31 +87,16 @@ class PlanModel: Object {
     }
     
     // GoalIdに紐づくPlanの配列を取得
-    static func getPlansByGoalId(goalId:Int) -> [Int: [PlanModel]] {
+    static func getPlansByGoalId(goalId:Int) -> [PlanModel] {
         // タップしたGoalオブジェクトをidから取得
         let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
         // Goalオブジェクトに紐づくPlanオブジェクトを取得
         let plans = goal.plans
-        var planList = [Int: [PlanModel]]()
-        var doList: [PlanModel] = []
-        var checkList: [PlanModel] = []
-        var actList: [PlanModel] = []
-        
+        var planList: [PlanModel] = []
         for plan in plans {
-            switch plan.status {
-            case 0:
-                doList.append(plan)
-            case 1:
-                checkList.append(plan)
-            case 2:
-                actList.append(plan)
-            default:
-                break
-            }
-
+            planList.append(plan)
         }
         // 配列で返す
-        planList = [0:doList, 1:checkList, 2:actList]
         return planList
     }
     
@@ -122,8 +107,8 @@ class PlanModel: Object {
         })
     }
     
-    static func fetchDoArray() -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("status == 0")
+    static func fetchDoArray(goalId:Int, status:Int) -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
         var doArray: [PlanModel] = []
         for plan in plans {
             doArray.append(plan)
@@ -131,8 +116,8 @@ class PlanModel: Object {
         return doArray
     }
     
-    static func fetchCheckArray() -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("status == 1")
+    static func fetchCheckArray(goalId:Int, status:Int) -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
         var checkArray: [PlanModel] = []
         for plan in plans {
             checkArray.append(plan)
@@ -140,8 +125,8 @@ class PlanModel: Object {
         return checkArray
     }
     
-    static func fetchActArray() -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("status == 2")
+    static func fetchActArray(goalId:Int, status:Int) -> [PlanModel] {
+        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
         var actArray: [PlanModel] = []
         for plan in plans {
             actArray.append(plan)

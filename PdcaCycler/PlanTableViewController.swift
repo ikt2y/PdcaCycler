@@ -13,8 +13,12 @@ class PlanTableViewController: UITableViewController {
     var willGoalId:Int?
     var fromPlanId:Int?
     let realm = try! Realm()
-    var planList: [Int: [PlanModel]] = [:]
     var plans: [PlanModel] = []
+    
+    var doArray: [PlanModel] = []
+    var checkArray: [PlanModel] = []
+    var actArray: [PlanModel] = []
+    
     var plan: PlanModel!
     
     // Section Data
@@ -44,11 +48,10 @@ class PlanTableViewController: UITableViewController {
 
     
     func fetchPlans(goalId: Int) {
-        self.planList = PlanModel.getPlansByGoalId(goalId: goalId)
-        let doList: [PlanModel] = []
-        let checkList: [PlanModel] = []
-        let actList: [PlanModel] = []
-        [0:doList, 1:checkList, 2:actList] = planList
+        plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        doArray = PlanModel.fetchDoArray(goalId: goalId,status: 0)
+        checkArray = PlanModel.fetchCheckArray(goalId: goalId, status: 1)
+        actArray = PlanModel.fetchActArray(goalId: goalId, status:2)
     }
 
     override func didReceiveMemoryWarning() {
