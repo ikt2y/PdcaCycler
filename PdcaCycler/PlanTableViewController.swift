@@ -87,8 +87,11 @@ class PlanTableViewController: UITableViewController {
             return [checkBtn]
         case 2:
             let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
-                // ステータス変更
-                PlanModel.changeStatus(plan: item, status: 3)
+                // アクションを加えたPlanのidを取得し代入
+                self.fromPlanId = item.id
+                // 振り返り画面に遷移
+                self.performSegue(withIdentifier: "toDetailView",sender: nil)
+                
             }
             detailBtn.backgroundColor = UIColor.blue
             return [detailBtn]
@@ -136,6 +139,19 @@ class PlanTableViewController: UITableViewController {
             let navItem: UINavigationItem = UINavigationItem(title:"振り返りをする")
             navItem.rightBarButtonItem = UIBarButtonItem(title: "作成",style:UIBarButtonItemStyle.plain, target: checkVC, action: #selector(checkVC.tapSaveBtn(_:)))
             navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: checkVC, action: #selector(checkVC.tapCloseBtn(_:)))
+            navBar.pushItem(navItem, animated:true)
+            segue.destination.view.addSubview(navBar)
+            
+        } else if(segue.identifier == "toDetailView") {
+            
+            let detailView: DetailViewController = segue.destination as! DetailViewController
+            detailView.toPlanId = self.fromPlanId!
+            
+            //ナビゲーションバーを作る
+            let navBar = UINavigationBar()
+            navBar.frame = CGRect(x:0, y:0, width:self.view.bounds.width, height:60)
+            let navItem: UINavigationItem = UINavigationItem(title:"詳細")
+            navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: detailView, action: #selector(detailView.tapCloseBtn(_:)))
             navBar.pushItem(navItem, animated:true)
             segue.destination.view.addSubview(navBar)
             
