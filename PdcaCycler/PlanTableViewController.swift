@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class PlanTableViewController: UITableViewController {
-    var willGoalId:Int!
+    var willGoalId:Int?
     let realm = try! Realm()
     var plans: [PlanModel] = []
     var plan: PlanModel!
@@ -23,10 +23,11 @@ class PlanTableViewController: UITableViewController {
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(GoalTableViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl!)
+        print(self.willGoalId!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.fetchPlans(goalId: self.willGoalId)
+        self.fetchPlans(goalId: self.willGoalId!)
     }
     
     func refresh(goalId: Int) {
@@ -66,11 +67,21 @@ class PlanTableViewController: UITableViewController {
     
     // Addボタンタップした時
     func onTapAddPlan(){
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "AddPlanVC")
-        present(nextView, animated: true, completion: nil)
+        performSegue(withIdentifier: "toAddPlan",sender: nil)
+//        let storyboard: UIStoryboard = self.storyboard!
+//        let nextView = storyboard.instantiateViewController(withIdentifier: "AddPlanVC")
+//        present(nextView, animated: true, completion: nil)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toAddPlan") {
+            let addPlanVC: AddPlanViewController = segue.destination as! AddPlanViewController
+            print(self.willGoalId!)
+            print("======================")
+            addPlanVC.tmpGoalId = self.willGoalId!
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -106,14 +117,8 @@ class PlanTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
