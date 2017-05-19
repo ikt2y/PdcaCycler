@@ -74,7 +74,14 @@ class GoalTableViewController: UITableViewController{
         cell.name.text = item.name
         cell.endDate.text = item.endDate.dateToString()
         cell.cycleLabel.text = String(item.plans.count) + "回"
+        cell.sideView.backgroundColor = colorForIndex(index: indexPath.row)
         return cell
+    }
+    
+    func colorForIndex(index: Int) -> UIColor {
+        let itemCount = goals.count - 1
+        let color = (CGFloat(index) / CGFloat(itemCount))
+        return UIColor(red: 32/255.0, green: color, blue: 255/255.0, alpha: 1.0)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

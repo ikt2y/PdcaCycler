@@ -10,9 +10,9 @@ import UIKit
 
 class GoalTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var cycleLabel: UILabel!
+    @IBOutlet weak var sideView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
