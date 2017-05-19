@@ -17,16 +17,4 @@ extension Date {
         return formatter.string(from: self)
     }
 
-    
-}
-
-extension String {
-    
-    func stringToDate() -> Date {
-        let formatter: DateFormatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateFormat = "yyyy/MM/dd"
-        return formatter.date(from: self)!
-    }
-    
 }
