@@ -21,9 +21,8 @@ class PlanTableViewController: UITableViewController {
         self.navigationItem.setRightBarButtonItems([rightAddBarButtonItem], animated: true)
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
-        self.refreshControl?.addTarget(self, action: #selector(GoalTableViewController.refresh), for: UIControlEvents.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl!)
-        print(self.willGoalId!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,7 +30,7 @@ class PlanTableViewController: UITableViewController {
     }
     
     func refresh(goalId: Int) {
-        plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        self.fetchPlans(goalId: self.willGoalId!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl?.endRefreshing()
         }
