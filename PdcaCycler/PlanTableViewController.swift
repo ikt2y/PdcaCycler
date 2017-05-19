@@ -112,7 +112,9 @@ class PlanTableViewController: UITableViewController {
                 cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
                     // ステータスの変更
                     PlanModel.changeStatus(plan: plan, status: 1)
-                    // 再読み込み
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self?.fetchPlans(goalId: (self?.willGoalId!)!)
+                    }
                 })
             }
             return cell
