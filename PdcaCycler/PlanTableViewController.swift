@@ -120,6 +120,25 @@ class PlanTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let plan = plans[indexPath.row]
+        switch plan.status {
+        case 0:
+            PlanModel.changeStatus(plan: plan, status: 1)
+        case 1:
+            self.fromPlanId = plan.id
+            self.performSegue(withIdentifier: "toCheckVC",sender: nil)
+        case 2:
+            self.fromPlanId = plan.id
+            // 振り返り画面に遷移
+            self.performSegue(withIdentifier: "toDetailView",sender: nil)
+        default:
+            break
+        }
+
+    }
+    
+    
     func colorForIndex(index: Int) -> UIColor {
         let itemCount = plans.count - 1
         let color = (CGFloat(index) / CGFloat(itemCount))
