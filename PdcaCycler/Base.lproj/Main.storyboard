@@ -66,18 +66,64 @@
         <scene sceneID="jUT-24-XZH">
             <objects>
                 <tableViewController storyboardIdentifier="PlanTableVC" id="SKC-sE-ZG7" customClass="PlanTableViewController" customModule="PdcaCycler" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="RD2-PD-NWR">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="121" sectionHeaderHeight="28" sectionFooterHeight="28" id="RD2-PD-NWR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WAU-du-Ojy">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="planCell" rowHeight="121" id="WAU-du-Ojy" customClass="PlanCell" customModule="PdcaCycler" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="121"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WAU-du-Ojy" id="sgV-ZQ-4tK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvj-2x-oz3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwR-Zc-UcJ">
+                                                    <rect key="frame" x="38" y="17" width="300" height="58"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="4B0-LZ-KZ7"/>
+                                                        <constraint firstAttribute="height" constant="58" id="nig-ys-iuo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sP3-mf-GpR">
+                                                    <rect key="frame" x="38" y="83" width="300" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="WeT-IL-jpS"/>
+                                                        <constraint firstAttribute="width" constant="300" id="c6s-Le-ymn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="bwR-Zc-UcJ" firstAttribute="centerX" secondItem="lvj-2x-oz3" secondAttribute="centerX" id="Bke-qf-X3w"/>
+                                                <constraint firstAttribute="bottom" secondItem="sP3-mf-GpR" secondAttribute="bottom" constant="16" id="CnF-1d-LQb"/>
+                                                <constraint firstItem="bwR-Zc-UcJ" firstAttribute="top" secondItem="lvj-2x-oz3" secondAttribute="top" constant="17" id="auk-iq-yhK"/>
+                                                <constraint firstItem="sP3-mf-GpR" firstAttribute="centerX" secondItem="lvj-2x-oz3" secondAttribute="centerX" id="kXu-W0-CfE"/>
+                                                <constraint firstItem="sP3-mf-GpR" firstAttribute="top" secondItem="bwR-Zc-UcJ" secondAttribute="bottom" constant="8" id="y01-O5-g0U"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="lvj-2x-oz3" secondAttribute="bottom" id="0ao-QG-Fye"/>
+                                        <constraint firstItem="lvj-2x-oz3" firstAttribute="leading" secondItem="sgV-ZQ-4tK" secondAttribute="leading" id="CLR-1l-R7T"/>
+                                        <constraint firstAttribute="trailing" secondItem="lvj-2x-oz3" secondAttribute="trailing" id="N99-Ig-UJM"/>
+                                        <constraint firstItem="lvj-2x-oz3" firstAttribute="top" secondItem="sgV-ZQ-4tK" secondAttribute="top" id="wlK-GK-VFB"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="BackView" destination="lvj-2x-oz3" id="ejT-gA-HCa"/>
+                                    <outlet property="endDateLabel" destination="sP3-mf-GpR" id="ZGC-it-M9U"/>
+                                    <outlet property="titleLabel" destination="bwR-Zc-UcJ" id="fSU-OI-Bfd"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -93,7 +139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcH-oN-dBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3026" y="103"/>
+            <point key="canvasLocation" x="3024.8000000000002" y="102.99850074962519"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="tij-Lx-DJR">

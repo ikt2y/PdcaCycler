@@ -58,55 +58,65 @@ class PlanTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // sample
-        let cell: UITableViewCell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        let item = plans[indexPath.row]
-        cell.textLabel?.text = item.name
-        return cell
+        
+        // create
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "planCell", for: indexPath) as? PlanCell {
+            let item = plans[indexPath.row]
+            cell.defaultColor = .lightGray
+            cell.firstTrigger = 0.25;
+            cell.selectionStyle = .none
+            cell.titleLabel.text = item.name
+            cell.endDateLabel.text = item.endDate.dateToString()
+            cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
+                // 処理
+            })
+            return cell
+        }
+        return UITableViewCell()
     }
     
     // スワイプ時のボタン
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let item = plans[indexPath.row]
-        switch item.status {
-        case 0:
-            let completeBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "完了") { (action, indexPath) in
-                // ステータス変更
-                PlanModel.changeStatus(plan: item, status: 1)
-            }
-            completeBtn.backgroundColor = UIColor.blue
-            return [completeBtn]
-        case 1:
-            let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
-                // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = item.id
-                // 振り返り画面に遷移
-                self.performSegue(withIdentifier: "toCheckVC",sender: nil)
-            }
-            checkBtn.backgroundColor = UIColor.blue
-            return [checkBtn]
-        case 2:
-            let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
-                // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = item.id
-                // 振り返り画面に遷移
-                self.performSegue(withIdentifier: "toDetailView",sender: nil)
-                
-            }
-            detailBtn.backgroundColor = UIColor.blue
-            return [detailBtn]
-        default:
-            let deleteBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
-                tableView.isEditing = false
-                print("delete")
-            }
-            deleteBtn.backgroundColor = UIColor.red
-            return [deleteBtn]
-        }
-        
-       
-        
-    }
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let item = plans[indexPath.row]
+//        switch item.status {
+//        case 0:
+//            let completeBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "完了") { (action, indexPath) in
+//                // ステータス変更
+//                PlanModel.changeStatus(plan: item, status: 1)
+//            }
+//            completeBtn.backgroundColor = UIColor.blue
+//            return [completeBtn]
+//        case 1:
+//            let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
+//                // アクションを加えたPlanのidを取得し代入
+//                self.fromPlanId = item.id
+//                // 振り返り画面に遷移
+//                self.performSegue(withIdentifier: "toCheckVC",sender: nil)
+//            }
+//            checkBtn.backgroundColor = UIColor.blue
+//            return [checkBtn]
+//        case 2:
+//            let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
+//                // アクションを加えたPlanのidを取得し代入
+//                self.fromPlanId = item.id
+//                // 振り返り画面に遷移
+//                self.performSegue(withIdentifier: "toDetailView",sender: nil)
+//                
+//            }
+//            detailBtn.backgroundColor = UIColor.blue
+//            return [detailBtn]
+//        default:
+//            let deleteBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
+//                tableView.isEditing = false
+//                print("delete")
+//            }
+//            deleteBtn.backgroundColor = UIColor.red
+//            return [deleteBtn]
+//        }
+//        
+//       
+//        
+//    }
     
     
     // Addボタンタップした時
