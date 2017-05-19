@@ -19,6 +19,11 @@ class AddGoalViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        name.addBorderBottom(height: 1.0, color: .lightGray)
+        text.addBorderBottom(height: 1.0, color: .lightGray)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
