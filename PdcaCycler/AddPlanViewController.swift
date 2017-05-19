@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddPlanViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var endDatePicker: UIDatePicker!
+    let realm = try! Realm()
     var tmpGoalId:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "計画をつくる"
-        // テスト
-        self.tmpGoalId = 1
         // Do any additional setup after loading the view.
     }
 

@@ -76,8 +76,6 @@ class PlanTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toAddPlan") {
             let addPlanVC: AddPlanViewController = segue.destination as! AddPlanViewController
-            print(self.willGoalId!)
-            print("======================")
             addPlanVC.tmpGoalId = self.willGoalId!
         }
     }

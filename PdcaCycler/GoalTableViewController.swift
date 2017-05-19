@@ -91,8 +91,9 @@ class GoalTableViewController: UITableViewController{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toPlanTableVC") {
-            let nextVC: PlanTableViewController = (segue.destination as? PlanTableViewController)!
-            nextVC.willGoalId = self.passGoalId
+            let nextVC: PlanTableViewController = segue.destination as! PlanTableViewController
+            print(self.passGoalId!)
+            nextVC.willGoalId = self.passGoalId!
         }
     }
 }

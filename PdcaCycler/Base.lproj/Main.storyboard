@@ -86,8 +86,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="CUc-Gm-0Kl" kind="show" id="EBW-4H-FHC"/>
-                        <segue destination="aj4-jd-SgJ" kind="show" id="tgR-i7-QQ8"/>
+                        <segue destination="aj4-jd-SgJ" kind="show" identifier="toAddPlan" id="vw0-Vc-INl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcH-oN-dBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,24 +159,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFg-h6-h0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3797.5999999999999" y="102.99850074962519"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="NTO-h4-Ouz">
-            <objects>
-                <viewController id="CUc-Gm-0Kl" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Duk-Bs-2Dx"/>
-                        <viewControllerLayoutGuide type="bottom" id="cpD-wF-z2g"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SP1-Ai-y6r">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nxI-8K-7jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3798" y="-591"/>
         </scene>
         <!--Add Goal View Controller-->
         <scene sceneID="1M3-8W-cut">
