@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>MCSwipeTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PdcaCycler.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>058A52B9C311B267EDB4E59CF30A2B8E</key>
+		<key>23708468789FAD3A13476496163B797F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19D17F3D7874AF773EE7C05B3B1DCDE6</key>
+		<key>38638BF6797B30B2CCE91AE8A0A38108</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD575494EF17EC43A48B33FBF46C778D</key>
+		<key>3C944FAAA28E1A209D8333DA210B55F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4AEEA7A71C67E9AD63EDD4C7A2D6BA73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
