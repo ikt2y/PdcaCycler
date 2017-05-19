@@ -41,11 +41,12 @@ class GoalTableViewController: UITableViewController{
         
         // Goalの読み込み
         self.fetchGoals()
-        
+        self.tableView.reloadData()
     }
     
     func refresh() {
         goals = GoalModel.getAllGoals()
+        self.tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl?.endRefreshing()
         }
@@ -71,8 +72,8 @@ class GoalTableViewController: UITableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as! GoalTableViewCell
         let item = goals[indexPath.row]
         cell.name.text = item.name
-        cell.startDate.text = item.startDate.dateToString()
         cell.endDate.text = item.endDate.dateToString()
+        cell.cycleLabel.text = String(item.plans.count) + "回"
         return cell
     }
     
