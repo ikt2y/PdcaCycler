@@ -1,4 +1,4 @@
-# PdcaCycler
+# ONISOKU!!
 ## About
 * PDCAを片手で管理できるアプリ
 * Plan(計画)-Do(実施/実行)-Check(点検/評価)-Act(処理/改善)のサイクルをワンストップでサポート
