@@ -83,5 +83,12 @@ class PlanModel: Object {
         return planList
     }
     
+    // status変更
+    static func changeStatus(plan:PlanModel,status:Int) {
+        try! realm.write({
+            plan.status = status
+        })
+    }
+    
     
 }

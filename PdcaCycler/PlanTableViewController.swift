@@ -64,12 +64,48 @@ class PlanTableViewController: UITableViewController {
         return cell
     }
     
+    // スワイプ時のボタン
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = plans[indexPath.row]
+        switch item.status {
+        case 0:
+            let completeBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "完了") { (action, indexPath) in
+                // ステータス変更
+                PlanModel.changeStatus(plan: item, status: 1)
+            }
+            completeBtn.backgroundColor = UIColor.blue
+            return [completeBtn]
+        case 1:
+            let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
+                // ステータス変更
+                PlanModel.changeStatus(plan: item, status: 2)
+            }
+            checkBtn.backgroundColor = UIColor.blue
+            return [checkBtn]
+        case 2:
+            let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
+                // ステータス変更
+                PlanModel.changeStatus(plan: item, status: 3)
+            }
+            detailBtn.backgroundColor = UIColor.blue
+            return [detailBtn]
+        default:
+            let deleteBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
+                tableView.isEditing = false
+                print("delete")
+            }
+            deleteBtn.backgroundColor = UIColor.red
+            return [deleteBtn]
+        }
+        
+       
+        
+    }
+    
+    
     // Addボタンタップした時
     func onTapAddPlan(){
         performSegue(withIdentifier: "toAddPlan",sender: nil)
-//        let storyboard: UIStoryboard = self.storyboard!
-//        let nextView = storyboard.instantiateViewController(withIdentifier: "AddPlanVC")
-//        present(nextView, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
