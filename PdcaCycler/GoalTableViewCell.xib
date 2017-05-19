@@ -16,14 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaO-mf-zuX">
                         <rect key="frame" x="13" y="18" width="294" height="54"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="54" id="Ye5-T2-F58"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -111,6 +108,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="cycleLabel" destination="Uxk-T6-5Ve" id="TdF-Pd-Pi5"/>
                 <outlet property="endDate" destination="Pgd-ZE-B1I" id="99L-gE-zje"/>
                 <outlet property="name" destination="uaO-mf-zuX" id="qRG-MQ-yg3"/>
                 <outlet property="startDate" destination="tqa-m8-9Wu" id="G4k-aU-0gg"/>

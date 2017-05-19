@@ -12,6 +12,7 @@ class GoalTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
+    @IBOutlet weak var cycleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
