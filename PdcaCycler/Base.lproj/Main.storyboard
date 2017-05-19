@@ -86,7 +86,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="aj4-jd-SgJ" kind="show" identifier="toAddPlan" id="vw0-Vc-INl"/>
+                        <segue destination="aj4-jd-SgJ" kind="presentation" identifier="toAddPlan" id="vw0-Vc-INl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcH-oN-dBi" userLabel="First Responder" sceneMemberID="firstResponder"/>

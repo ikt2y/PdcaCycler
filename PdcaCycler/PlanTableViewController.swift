@@ -76,7 +76,21 @@ class PlanTableViewController: UITableViewController {
         if (segue.identifier == "toAddPlan") {
             let addPlanVC: AddPlanViewController = segue.destination as! AddPlanViewController
             addPlanVC.tmpGoalId = self.willGoalId!
+            
+            //ナビゲーションバーを作る
+            let navBar = UINavigationBar()
+            navBar.frame = CGRect(x:0, y:0, width:self.view.bounds.width, height:60)
+            let navItem: UINavigationItem = UINavigationItem(title:"計画をつくる")
+            navItem.rightBarButtonItem = UIBarButtonItem(title: "作成",style:UIBarButtonItemStyle.plain, target: addPlanVC, action: #selector(addPlanVC.tapSaveBtn(_:)))
+            navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: addPlanVC, action: #selector(addPlanVC.tapCloseBtn(_:)))
+            navBar.pushItem(navItem, animated:true)
+            segue.destination.view.addSubview(navBar)
         }
+    }
+    
+    internal func action(sender:UIButton) {
+        //モーダル表示されているビューコントローラーを解放する。
+        self.dismiss(animated: true,completion: nil)
     }
     
     /*
