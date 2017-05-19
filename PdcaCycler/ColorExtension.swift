@@ -11,9 +11,9 @@ import UIKit
 extension UIColor {
     
     func colorFromRGB(rgb: String, alpha: CGFloat) -> UIColor {
-        let scanner = NSScanner(string: rgb)
+        let scanner = Scanner(string: rgb)
         var rgbInt: UInt32 = 0
-        scanner.scanHexInt(&rgbInt)
+        scanner.scanHexInt32(&rgbInt)
         
         let r = CGFloat(((rgbInt & 0xFF0000) >> 16)) / 255.0
         let g = CGFloat(((rgbInt & 0x00FF00) >> 8)) / 255.0
