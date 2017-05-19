@@ -17,14 +17,16 @@ class AddGoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // NavTitle
-        self.navigationItem.title = "新しく目標を追加"
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func tapCloseBtn(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func tapSaveBtn(_ sender: Any) {

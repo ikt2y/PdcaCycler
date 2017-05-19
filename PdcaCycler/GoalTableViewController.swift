@@ -84,16 +84,23 @@ class GoalTableViewController: UITableViewController{
     
     // Addボタンタップした時
     func onTapAddGoal(){
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "AddGoalVC")
-        present(nextView, animated: true, completion: nil)
+        performSegue(withIdentifier: "toAddGoal", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toPlanTableVC") {
             let nextVC: PlanTableViewController = segue.destination as! PlanTableViewController
-            print(self.passGoalId!)
             nextVC.willGoalId = self.passGoalId!
+        } else if(segue.identifier == "toAddGoal")  {
+            let addGoalVC: AddGoalViewController = segue.destination as! AddGoalViewController
+            //ナビゲーションバーを作る
+            let navBar = UINavigationBar()
+            navBar.frame = CGRect(x:0, y:0, width:self.view.bounds.width, height:60)
+            let navItem: UINavigationItem = UINavigationItem(title:"目標を決める")
+            navItem.rightBarButtonItem = UIBarButtonItem(title: "作成",style:UIBarButtonItemStyle.plain, target: addGoalVC, action: #selector(addGoalVC.tapSaveBtn(_:)))
+            navItem.leftBarButtonItem = UIBarButtonItem(title: "<戻る",style:UIBarButtonItemStyle.plain, target: addGoalVC, action: #selector(addGoalVC.tapCloseBtn(_:)))
+            navBar.pushItem(navItem, animated:true)
+            segue.destination.view.addSubview(navBar)
         }
     }
 }
