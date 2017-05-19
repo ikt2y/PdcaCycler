@@ -30,6 +30,7 @@ class PlanTableViewController: UITableViewController {
         super.viewDidLoad()
         let rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.onTapAddPlan))
         self.navigationItem.setRightBarButtonItems([rightAddBarButtonItem], animated: true)
+        self.navigationItem.title = "計画一覧"
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
@@ -192,8 +193,13 @@ class PlanTableViewController: UITableViewController {
     
     
     // Addボタンタップした時
-    func onTapAddPlan(){
+    @IBAction func onTapAddPlan(){
         performSegue(withIdentifier: "toAddPlan",sender: nil)
+    }
+    
+    // Addボタンタップした時
+    @IBAction func onTapClose(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
