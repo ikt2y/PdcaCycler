@@ -109,7 +109,8 @@ class PlanTableViewController: UITableViewController {
             cell.BackView.backgroundColor = colorForIndex(index: indexPath.row)
             
             // まだ手をつけていない時はスワイプで完了できる
-            if plan.status == 0 {
+            switch plan.status {
+            case 0:
                 cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
                     // ステータスの変更
                     PlanModel.changeStatus(plan: plan, status: 1)
@@ -117,6 +118,23 @@ class PlanTableViewController: UITableViewController {
                         self?.fetchPlans(goalId: (self?.willGoalId!)!)
                     }
                 })
+            case 1:
+                cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "pen")), color: UIColor.orange, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
+                    // アクションを加えたPlanのidを取得し代入
+                    self?.fromPlanId = plan.id
+                    // 振り返り画面に遷移
+                    self?.performSegue(withIdentifier: "toCheckVC",sender: nil)
+                })
+            case 2:
+                cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "view")), color: UIColor.brown, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
+                    // アクションを加えたPlanのidを取得し代入
+                    self?.fromPlanId = plan.id
+                    // 振り返り画面に遷移
+                    self?.performSegue(withIdentifier: "toDetailView",sender: nil)
+                })
+                
+            default:
+                break
             }
             return cell
         }
@@ -157,7 +175,7 @@ class PlanTableViewController: UITableViewController {
                 // ステータス変更
                 PlanModel.changeStatus(plan: item, status: 1)
             }
-            completeBtn.backgroundColor = .lightGray
+            completeBtn.backgroundColor = .yellow
             return [completeBtn]
         case 1:
             let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
