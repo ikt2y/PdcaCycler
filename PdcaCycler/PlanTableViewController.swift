@@ -13,6 +13,7 @@ class PlanTableViewController: UITableViewController {
     var willGoalId:Int?
     var fromPlanId:Int?
     let realm = try! Realm()
+    
     var plans: [PlanModel] = []
     
     var doArray: [PlanModel] = []
@@ -22,8 +23,8 @@ class PlanTableViewController: UITableViewController {
     var plan: PlanModel!
     
     // Section Data
-    let sectionArray: [String] = ["DO", "CHECK", "ACT"]
-    var sectionData: [Int: [String]] = [:]
+//    let sectionArray: [String] = ["DO", "CHECK", "ACT"]
+//    var sectionData: [Int: [PlanModel]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class PlanTableViewController: UITableViewController {
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl!)
+        sectionData = [0:doArray, 1:checkArray, 2:actArray]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +50,13 @@ class PlanTableViewController: UITableViewController {
 
     
     func fetchPlans(goalId: Int) {
+        
         plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        
         doArray = PlanModel.fetchDoArray(goalId: goalId,status: 0)
         checkArray = PlanModel.fetchCheckArray(goalId: goalId, status: 1)
         actArray = PlanModel.fetchActArray(goalId: goalId, status:2)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,26 +67,26 @@ class PlanTableViewController: UITableViewController {
     
     // sectionの設定
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let myView: UIView = UIView()
-        myView.backgroundColor = .black
-        let label = UILabel()
-        label.text = sectionArray[section]
-        label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
-        myView.addSubview(label)
-        return myView
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionArray[section]
-    }
+//    
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let myView: UIView = UIView()
+//        myView.backgroundColor = .black
+//        let label = UILabel()
+//        label.text = sectionArray[section]
+//        label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
+//        myView.addSubview(label)
+//        return myView
+//    }
+//    
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 70
+//    }
+//    
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return sectionArray[section]
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -92,7 +97,6 @@ class PlanTableViewController: UITableViewController {
         
         // create
         if let cell = tableView.dequeueReusableCell(withIdentifier: "planCell", for: indexPath) as? PlanCell {
-            
             let plan = plans[indexPath.row]
             cell.defaultColor = .lightGray
             cell.firstTrigger = 0.25;
@@ -109,8 +113,6 @@ class PlanTableViewController: UITableViewController {
                     // 再読み込み
                 })
             }
-            
-            
             return cell
         }
         return UITableViewCell()
