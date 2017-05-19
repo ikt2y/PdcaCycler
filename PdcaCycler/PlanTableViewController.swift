@@ -34,7 +34,7 @@ class PlanTableViewController: UITableViewController {
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl!)
-        sectionData = [0:doArray, 1:checkArray, 2:actArray]
+//        sectionData = [0:doArray, 1:checkArray, 2:actArray]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +43,7 @@ class PlanTableViewController: UITableViewController {
     
     func refresh(goalId: Int) {
         self.fetchPlans(goalId: self.willGoalId!)
+        self.tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl?.endRefreshing()
         }
@@ -52,10 +53,11 @@ class PlanTableViewController: UITableViewController {
     func fetchPlans(goalId: Int) {
         
         plans = PlanModel.getPlansByGoalId(goalId: goalId)
-        
-        doArray = PlanModel.fetchDoArray(goalId: goalId,status: 0)
-        checkArray = PlanModel.fetchCheckArray(goalId: goalId, status: 1)
-        actArray = PlanModel.fetchActArray(goalId: goalId, status:2)
+        self.tableView.reloadData()
+//        
+//        doArray = PlanModel.fetchDoArray(goalId: goalId,status: 0)
+//        checkArray = PlanModel.fetchCheckArray(goalId: goalId, status: 1)
+//        actArray = PlanModel.fetchActArray(goalId: goalId, status:2)
         
     }
 
