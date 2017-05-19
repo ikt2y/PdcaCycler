@@ -67,12 +67,20 @@ class PlanTableViewController: UITableViewController {
             cell.selectionStyle = .none
             cell.titleLabel.text = item.name
             cell.endDateLabel.text = item.endDate.dateToString()
+            cell.BackView.backgroundColor = colorForIndex(index: indexPath.row)
+            
             cell.setSwipeGestureWith(UIImageView(image: UIImage(named: "check")), color: UIColor.green, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, state, mode) in
                 // 処理
             })
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func colorForIndex(index: Int) -> UIColor {
+        let itemCount = plans.count - 1
+        let color = (CGFloat(index) / CGFloat(itemCount))
+        return UIColor(red: 32/255.0, green: color, blue: 255/255.0, alpha: 1.0)
     }
     
     // スワイプ時のボタン
