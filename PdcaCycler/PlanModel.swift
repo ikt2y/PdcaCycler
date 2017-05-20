@@ -106,7 +106,9 @@ class PlanModel: Object {
         let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
         // Goalオブジェクトに紐づくPlanオブジェクトを取得
         let plans = goal.plans
+        // statusで条件分岐
         switch status {
+        // 未完リストの取得
         case 0:
             var doList: [PlanModel] = []
             for plan in plans {
@@ -114,7 +116,8 @@ class PlanModel: Object {
                     doList.append(plan)
                 }
             }
-        return doList
+            return doList
+        // 完了リストの取得
         case 1:
             var checkList: [PlanModel] = []
             for plan in plans {
@@ -123,6 +126,7 @@ class PlanModel: Object {
                 }
             }
             return checkList
+        // 振り返り済リストの取得
         case 2:
             var actList: [PlanModel] = []
             for plan in plans {
