@@ -34,6 +34,7 @@ class PlanTableViewController: UITableViewController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.separatorColor = .clear
         self.tableView.addSubview(refreshControl!)
 //        sectionData = [0:doArray, 1:checkArray, 2:actArray]
     }

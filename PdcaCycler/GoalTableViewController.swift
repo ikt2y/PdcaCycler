@@ -22,6 +22,7 @@ class GoalTableViewController: UITableViewController{
         self.tableView.register(nib, forCellReuseIdentifier: "goalCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.separatorColor = .clear
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "更新")
         self.refreshControl?.addTarget(self, action: #selector(GoalTableViewController.refresh), for: UIControlEvents.valueChanged)
