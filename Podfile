@@ -8,5 +8,6 @@ target 'PdcaCycler' do
   # Pods for PdcaCycler
   pod 'RealmSwift'
   pod 'MCSwipeTableViewCell', '~> 2.1.4'
+  pod 'PageMenu'
 
 end

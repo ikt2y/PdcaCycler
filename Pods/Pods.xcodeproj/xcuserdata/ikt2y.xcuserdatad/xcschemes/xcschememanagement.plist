@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PageMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PdcaCycler.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23708468789FAD3A13476496163B797F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>38638BF6797B30B2CCE91AE8A0A38108</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3C944FAAA28E1A209D8333DA210B55F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4AEEA7A71C67E9AD63EDD4C7A2D6BA73</key>
+		<key>42B120B419A758E43DD1CF8AD8126F5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63DC7F4BB668467EA50B476C34E1A5F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>978A447F57E812AEE5D676FF361F1416</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF0B5B92473274E163DA851B888A4022</key>
 		<dict>
 			<key>primary</key>
 			<true/>

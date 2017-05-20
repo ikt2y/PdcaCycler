@@ -1,5 +1,6 @@
 PODS:
   - MCSwipeTableViewCell (2.1.4)
+  - PageMenu (2.0.0)
   - Realm (2.7.0):
     - Realm/Headers (= 2.7.0)
   - Realm/Headers (2.7.0)
@@ -8,13 +9,15 @@ PODS:
 
 DEPENDENCIES:
   - MCSwipeTableViewCell (~> 2.1.4)
+  - PageMenu
   - RealmSwift
 
 SPEC CHECKSUMS:
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
+  PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
   RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
 
-PODFILE CHECKSUM: 1b8bf0f75f1b6d74007cbe68c9e386c782631dd2
+PODFILE CHECKSUM: 094ac32a6f1b4afd6973bfc170287fd1335992c6
 
 COCOAPODS: 1.2.1
