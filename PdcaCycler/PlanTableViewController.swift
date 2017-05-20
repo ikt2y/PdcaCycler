@@ -14,17 +14,12 @@ class PlanTableViewController: UITableViewController {
     var fromPlanId:Int?
     let realm = try! Realm()
     
+    var plan: PlanModel!
     var plans: [PlanModel] = []
-    
+    // status毎の配列
     var doArray: [PlanModel] = []
     var checkArray: [PlanModel] = []
     var actArray: [PlanModel] = []
-    
-    var plan: PlanModel!
-    
-    // Section Data
-//    let sectionArray: [String] = ["DO", "CHECK", "ACT"]
-//    var sectionData: [Int: [PlanModel]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +31,6 @@ class PlanTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         self.tableView.separatorColor = .clear
         self.tableView.addSubview(refreshControl!)
-//        sectionData = [0:doArray, 1:checkArray, 2:actArray]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,14 +47,8 @@ class PlanTableViewController: UITableViewController {
 
     
     func fetchPlans(goalId: Int) {
-        
-        plans = PlanModel.getPlansByGoalId(goalId: goalId)
+        doArray = PlanModel.getPlansFilteredByStatus(goalId: goalId,status: 0)
         self.tableView.reloadData()
-//        
-//        doArray = PlanModel.fetchDoArray(goalId: goalId,status: 0)
-//        checkArray = PlanModel.fetchCheckArray(goalId: goalId, status: 1)
-//        actArray = PlanModel.fetchActArray(goalId: goalId, status:2)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,39 +57,20 @@ class PlanTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    // sectionの設定
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-//    
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let myView: UIView = UIView()
-//        myView.backgroundColor = .black
-//        let label = UILabel()
-//        label.text = sectionArray[section]
-//        label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
-//        myView.addSubview(label)
-//        return myView
-//    }
-//    
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 70
-//    }
-//    
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return sectionArray[section]
-//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return plans.count
+        return doArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create
         if let cell = tableView.dequeueReusableCell(withIdentifier: "planCell", for: indexPath) as? PlanCell {
-            let plan = plans[indexPath.row]
+            let plan = doArray[indexPath.row]
             cell.defaultColor = .lightGray
             cell.firstTrigger = 0.25;
             cell.selectionStyle = .gray
@@ -143,7 +112,8 @@ class PlanTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let plan = plans[indexPath.row]
+        let plan = doArray[indexPath.row]
+        // 0の配列だが念のため
         switch plan.status {
         case 0:
             PlanModel.changeStatus(plan: plan, status: 1)
@@ -162,26 +132,26 @@ class PlanTableViewController: UITableViewController {
     
     
     func colorForIndex(index: Int) -> UIColor {
-        let itemCount = plans.count - 1
-        let color = (CGFloat(index) / CGFloat(itemCount))
+        let planCount = doArray.count - 1
+        let color = (CGFloat(index) / CGFloat(planCount))
         return UIColor(red: 32/255.0, green: color, blue: 255/255.0, alpha: 1.0)
     }
     
     // スワイプ時のボタン
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let item = plans[indexPath.row]
-        switch item.status {
+        let plan = doArray[indexPath.row]
+        switch plan.status {
         case 0:
             let completeBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "完了") { (action, indexPath) in
                 // ステータス変更
-                PlanModel.changeStatus(plan: item, status: 1)
+                PlanModel.changeStatus(plan: self.plan, status: 1)
             }
             completeBtn.backgroundColor = .yellow
             return [completeBtn]
         case 1:
             let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
                 // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = item.id
+                self.fromPlanId = plan.id
                 // 振り返り画面に遷移
                 self.performSegue(withIdentifier: "toCheckVC",sender: nil)
             }
@@ -190,7 +160,7 @@ class PlanTableViewController: UITableViewController {
         case 2:
             let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
                 // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = item.id
+                self.fromPlanId = plan.id
                 // 振り返り画面に遷移
                 self.performSegue(withIdentifier: "toDetailView",sender: nil)
                 

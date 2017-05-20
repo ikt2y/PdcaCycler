@@ -100,39 +100,52 @@ class PlanModel: Object {
         return planList
     }
     
+    // GoalIdとstatusで絞り込んでオブジェクトの配列を取得する
+    static func getPlansFilteredByStatus(goalId:Int, status:Int) -> [PlanModel] {
+        // タップしたGoalオブジェクトをidから取得
+        let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
+        // Goalオブジェクトに紐づくPlanオブジェクトを取得
+        let plans = goal.plans
+        switch status {
+        case 0:
+            var doList: [PlanModel] = []
+            for plan in plans {
+                if plan.status == 0 {
+                    doList.append(plan)
+                }
+            }
+        return doList
+        case 1:
+            var checkList: [PlanModel] = []
+            for plan in plans {
+                if plan.status == 1 {
+                    checkList.append(plan)
+                }
+            }
+            return checkList
+        case 2:
+            var actList: [PlanModel] = []
+            for plan in plans {
+                if plan.status == 2 {
+                    actList.append(plan)
+                }
+            }
+            return actList
+        default:
+            let plans = goal.plans
+            var planList: [PlanModel] = []
+            for plan in plans {
+                planList.append(plan)
+            }
+            return planList
+        }
+    }
+    
     // status変更
     static func changeStatus(plan:PlanModel,status:Int) {
         try! realm.write({
             plan.status = status
         })
     }
-    
-    static func fetchDoArray(goalId:Int, status:Int) -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
-        var doArray: [PlanModel] = []
-        for plan in plans {
-            doArray.append(plan)
-        }
-        return doArray
-    }
-    
-    static func fetchCheckArray(goalId:Int, status:Int) -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
-        var checkArray: [PlanModel] = []
-        for plan in plans {
-            checkArray.append(plan)
-        }
-        return checkArray
-    }
-    
-    static func fetchActArray(goalId:Int, status:Int) -> [PlanModel] {
-        let plans = realm.objects(PlanModel.self).filter("id == \(goalId) AND status == \(status)")
-        var actArray: [PlanModel] = []
-        for plan in plans {
-            actArray.append(plan)
-        }
-        return actArray
-    }
-    
     
 }
