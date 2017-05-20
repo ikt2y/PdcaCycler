@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddPlanViewController: UIViewController {
+class AddPlanViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     let realm = try! Realm()
@@ -17,12 +17,19 @@ class AddPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // キーボード閉じるためdelegate設定
+        nameTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         nameTextField.placeholder = "1週間野菜しか食べない"
         nameTextField.addBorderBottom(height: 1.0, color: .lightGray)
+    }
+    
+    // Returnを押した時にキーボード閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {

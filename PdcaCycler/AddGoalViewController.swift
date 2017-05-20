@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddGoalViewController: UIViewController {
+class AddGoalViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var text: UITextField!
     @IBOutlet weak var endDate: UIDatePicker!
@@ -17,8 +17,18 @@ class AddGoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // キーボード閉じるためdelegate設定
+        name.delegate = self
+        text.delegate = self
     }
+    
+    // Returnを押した時にキーボード閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         name.addBorderBottom(height: 1.0, color: .lightGray)

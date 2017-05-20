@@ -10,7 +10,7 @@
 import UIKit
 import RealmSwift
 
-class CheckViewController: UIViewController {
+class CheckViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var keepTextField: UITextField!
     @IBOutlet weak var problemTextField: UITextField!
     @IBOutlet weak var tryTextField: UITextField!
@@ -20,13 +20,21 @@ class CheckViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        let textFieldArray:[UITextField] = [self.keepTextField, self.problemTextField, self.tryTextField, self.memoTextField]
+        for textField in textFieldArray {
+            textField.delegate = self
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Returnを押した時にキーボード閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
     }
     
     //戻る
