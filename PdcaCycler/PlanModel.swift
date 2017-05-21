@@ -101,7 +101,7 @@ class PlanModel: Object {
     }
     
     // GoalIdとstatusで絞り込んでオブジェクトの配列を取得する
-    static func getPlansFilteredByStatus(goalId:Int, status:Int) -> [PlanModel] {
+    static func getPlansByStatus(goalId:Int, status:Int) -> [PlanModel] {
         // タップしたGoalオブジェクトをidから取得
         let goal = realm.objects(GoalModel.self).filter("id == \(goalId)").first!
         // Goalオブジェクトに紐づくPlanオブジェクトを取得

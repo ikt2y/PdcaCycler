@@ -47,7 +47,7 @@ class PlanTableViewController: UITableViewController {
 
     
     func fetchPlans(goalId: Int) {
-        doArray = PlanModel.getPlansFilteredByStatus(goalId: goalId,status: 0)
+        doArray = PlanModel.getPlansByStatus(goalId: goalId,status: 0)
         self.tableView.reloadData()
     }
 
