@@ -137,50 +137,6 @@ class PlanTableViewController: UITableViewController {
         return UIColor(red: 32/255.0, green: color, blue: 255/255.0, alpha: 1.0)
     }
     
-    // スワイプ時のボタン
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let plan = doArray[indexPath.row]
-        switch plan.status {
-        case 0:
-            let completeBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "完了") { (action, indexPath) in
-                // ステータス変更
-                PlanModel.changeStatus(plan: self.plan, status: 1)
-            }
-            completeBtn.backgroundColor = .yellow
-            return [completeBtn]
-        case 1:
-            let checkBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "振り返る") { (action, index) -> Void in
-                // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = plan.id
-                // 振り返り画面に遷移
-                self.performSegue(withIdentifier: "toCheckVC",sender: nil)
-            }
-            checkBtn.backgroundColor = .lightGray
-            return [checkBtn]
-        case 2:
-            let detailBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "詳細") { (action, index) -> Void in
-                // アクションを加えたPlanのidを取得し代入
-                self.fromPlanId = plan.id
-                // 振り返り画面に遷移
-                self.performSegue(withIdentifier: "toDetailView",sender: nil)
-                
-            }
-            detailBtn.backgroundColor = .lightGray
-            return [detailBtn]
-        default:
-            let deleteBtn: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
-                tableView.isEditing = false
-                print("delete")
-            }
-            deleteBtn.backgroundColor = UIColor.red
-            return [deleteBtn]
-        }
-        
-       
-        
-    }
-    
-    
     // Addボタンタップした時
     @IBAction func onTapAddPlan(){
         performSegue(withIdentifier: "toAddPlan",sender: nil)
