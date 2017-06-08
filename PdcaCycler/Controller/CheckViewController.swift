@@ -25,6 +25,17 @@ class CheckViewController: UIViewController,UITextFieldDelegate {
             textField.delegate = self
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        keepTextField.placeholder = "今後も続けたいこと"
+        keepTextField.addBorderBottom(height: 1.0, color: .lightGray)
+        problemTextField.placeholder = "ダメだったところ、問題点"
+        problemTextField.addBorderBottom(height: 1.0, color: .lightGray)
+        tryTextField.placeholder = "改善策、次何やるか"
+        tryTextField.addBorderBottom(height: 1.0, color: .lightGray)
+        memoTextField.placeholder = "その他メモ、仮説は正しかったか"
+        memoTextField.addBorderBottom(height: 1.0, color: .lightGray)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
