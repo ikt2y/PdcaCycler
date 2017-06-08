@@ -20,6 +20,7 @@ class PlanModel: Object {
     dynamic var status = 0// ステータス
         // plan作成時
     dynamic var name = ""// Plan名
+    dynamic var kasetsu = ""// 仮説
     dynamic var startDate: Date!// 開始日
     dynamic var endDate: Date!// 終了日
         // check振り返り時
@@ -48,7 +49,7 @@ class PlanModel: Object {
     }
     
     // create plan
-    static func createPlan(tmpGoalId: Int, name: String, endDate: Date) -> PlanModel {
+    static func createPlan(tmpGoalId: Int, name: String, kasetsu: String, endDate: Date) -> PlanModel {
         let plan = PlanModel()
         let goal = realm.object(ofType: GoalModel.self, forPrimaryKey: tmpGoalId)!
         plan.name = name

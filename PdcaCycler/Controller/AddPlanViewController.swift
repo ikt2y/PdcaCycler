@@ -11,6 +11,7 @@ import RealmSwift
 
 class AddPlanViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var kasetsuTextField: UITextField!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     let realm = try! Realm()
     var tmpGoalId:Int?
@@ -19,11 +20,15 @@ class AddPlanViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // キーボード閉じるためdelegate設定
         nameTextField.delegate = self
+        kasetsuTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // textFieldの見た目の設定
         nameTextField.placeholder = "1週間野菜しか食べない"
         nameTextField.addBorderBottom(height: 1.0, color: .lightGray)
+        kasetsuTextField.placeholder = "野菜は健康的だし栄養価も高いから"
+        kasetsuTextField.addBorderBottom(height: 1.0, color: .lightGray)
     }
     
     // Returnを押した時にキーボード閉じる
@@ -42,19 +47,9 @@ class AddPlanViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func tapSaveBtn(_ sender: Any) {
-        let p = PlanModel.createPlan(tmpGoalId: self.tmpGoalId!, name: nameTextField.text!, endDate: endDatePicker.date as Date!)
+        let p = PlanModel.createPlan(tmpGoalId: self.tmpGoalId!, name: nameTextField.text!, kasetsu: kasetsuTextField.text! ,endDate: endDatePicker.date as Date!)
         p.save()
         self.dismiss(animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
