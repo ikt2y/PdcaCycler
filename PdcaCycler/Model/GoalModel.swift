@@ -17,10 +17,9 @@ class GoalModel: Object {
     
     // プロパティ
     dynamic var id = 0// id
-    dynamic var name = ""// Goal名
+    dynamic var name = ""// 目標名
     dynamic var text = ""// 説明
     dynamic var status: Bool = false// ステータス
-    dynamic var startDate: Date!// 開始日
     dynamic var endDate: Date!// 終了予定日
     
     // アソシエーション
@@ -45,7 +44,6 @@ class GoalModel: Object {
         let goal = GoalModel()
         goal.name = name
         goal.text = text
-        goal.startDate = Date()
         goal.endDate = endDate
         goal.id = self.getLastID()
         return goal
