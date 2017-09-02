@@ -17,22 +17,15 @@ class PlanModel: Object {
     
     // プロパティ
     dynamic var id = 0// id
-    dynamic var status = 0// ステータス
-        // plan作成時
-    dynamic var name = ""// Plan名
-    dynamic var kasetsu = ""// 仮説
-    dynamic var startDate: Date!// 開始日
-    dynamic var endDate: Date!// 終了日
-        // check振り返り時
-    dynamic var memo = ""
-    dynamic var keep = ""
-    dynamic var problem = ""
-    dynamic var nextPlan = ""
-    dynamic var lookBackDate: Date!
-
+    dynamic var status = 0// ステータス(0:まだ始めてない,1:途中,2:期限切れ,3:完了)
+    dynamic var keepDays:Int = 0// 継続日数
+    dynamic var bestKeepDays:Int = 0// 最高継続日数
     // アソシエーション
     dynamic var owner: GoalModel?
     
+    // plan作成時
+    dynamic var name = ""// アクション名
+    dynamic var endDate: Date!// 終了日
     
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
@@ -54,7 +47,6 @@ class PlanModel: Object {
         let goal = realm.object(ofType: GoalModel.self, forPrimaryKey: tmpGoalId)!
         plan.name = name
         plan.endDate = endDate
-        plan.startDate = Date()
         plan.id = self.getLastID()
         plan.owner = goal
         try! realm.write {
@@ -66,11 +58,12 @@ class PlanModel: Object {
     // 振り返り時の上書き
     static func addActInfo(plan: PlanModel,keep: String, problem: String, nextPlan: String, memo: String, status: Int) {
         try! realm.write({
-            plan.keep = keep
-            plan.problem = problem
-            plan.nextPlan = nextPlan
-            plan.lookBackDate = Date()
-            plan.status = status
+            // 継続日数を更新
+            plan.keepDays += 1
+            // 最高継続日数を更新
+            if (plan.keepDays > plan.bestKeepDays) {
+                plan.bestKeepDays = plan.keepDays
+            }
         })
     }
     
@@ -101,6 +94,9 @@ class PlanModel: Object {
         return planList
     }
     
+    // ステータス(0:まだ始めてない,1:はじめた,2:途中,3:期限切れ,4:完了)
+    
+    
     // GoalIdとstatusで絞り込んでオブジェクトの配列を取得する
     static func getPlansByStatus(goalId:Int, status:Int) -> [PlanModel] {
         // タップしたGoalオブジェクトをidから取得
@@ -109,25 +105,25 @@ class PlanModel: Object {
         let plans = goal.plans
         // statusで条件分岐
         switch status {
-        // 未完リストの取得
+        // まだ始めてないリストの取得
         case 0:
-            var doList: [PlanModel] = []
+            var notStartList: [PlanModel] = []
             for plan in plans {
                 if plan.status == 0 {
-                    doList.append(plan)
+                    notStartList.append(plan)
                 }
             }
-            return doList
-        // 完了リストの取得
+            return notStartList
+        // 実行中リストの取得
         case 1:
-            var checkList: [PlanModel] = []
+            var wipList: [PlanModel] = []
             for plan in plans {
                 if plan.status == 1 {
-                    checkList.append(plan)
+                    wipList.append(plan)
                 }
             }
-            return checkList
-        // 振り返り済リストの取得
+            return wipList
+        // 期限切れリストの取得
         case 2:
             var actList: [PlanModel] = []
             for plan in plans {
@@ -136,8 +132,17 @@ class PlanModel: Object {
                 }
             }
             return actList
+        // 完了リストの取得
+        case 3:
+            var doneList: [PlanModel] = []
+            for plan in plans {
+                if plan.status == 3 {
+                    doneList.append(plan)
+                }
+            }
+            return doneList
+        // その他
         default:
-            let plans = goal.plans
             var planList: [PlanModel] = []
             for plan in plans {
                 planList.append(plan)
